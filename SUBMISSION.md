@@ -1,7 +1,7 @@
 # Submission
 
 ## Candidate
-- **Name:** _(fill in)_
+- **Name:** Ritvik Srivastava
 - **Assignment chosen:** A (Data)
 - **Time spent (honest estimate):** _(fill in)_
 

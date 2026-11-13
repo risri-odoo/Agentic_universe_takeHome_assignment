@@ -2,6 +2,8 @@
 
 ## Tools used
 - Claude Code (Claude Opus 5.5), used as a coding agent in VS Code.
+- Claude (claude.ai chat), used to choose between Assignment A and B and to draft the design
+  brief I gave to Claude Code.
 
 ## What I used them for
 - Wrote the code in `solution/` and the tests, working from a detailed design brief I gave it
@@ -13,7 +15,8 @@
 - Drafted `SUBMISSION.md`, which I then reviewed and edited.
 
 ## What I wrote or decided myself
-- The core design, which I specified up front: store raw facts and derive everything
+- The core design. I drafted the design brief with help from Claude chat, then specified it to
+  Claude Code: store raw facts and derive everything
   (linking, orphans, buckets) at report time; no mutable counters (`lead_rows` / `event_lines`
   tables instead); file-level idempotency by content hash, with one transaction per file; an
   append-only `events` table enforced with triggers; phone as HMAC + last 4 digits, name
