@@ -33,12 +33,16 @@ def cmd_report(args):
 
 
 def cmd_reset(args):
-    path = Path(args.db)
-    if path.exists():
-        path.unlink()
-        print(f"Deleted {path}")
-    else:
-        print(f"Nothing to delete: {path} does not exist")
+    """Delete the database file (plus SQLite's WAL side files). The PII key in .env is kept."""
+    deleted = False
+    for suffix in ["", "-wal", "-shm"]:
+        path = Path(args.db + suffix)
+        if path.exists():
+            path.unlink()
+            print(f"Deleted {path}")
+            deleted = True
+    if not deleted:
+        print(f"Nothing to delete: {args.db} does not exist")
 
 
 def main(argv=None):

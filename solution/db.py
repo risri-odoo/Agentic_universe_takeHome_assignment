@@ -93,6 +93,15 @@ def connect(db_path):
     """
     conn = sqlite3.connect(db_path, isolation_level=None)
     conn.row_factory = sqlite3.Row
+    # Performance settings (they don't change what's stored):
+    # - WAL journal: commits append to a log instead of rewriting pages; still atomic.
+    # - synchronous=NORMAL: with WAL, a committed transaction survives an app crash;
+    #   only an OS crash / power cut could lose the last commit (never corrupt the DB).
+    # - 64 MB page cache: inserts into the event_id index arrive in random order, and
+    #   the default 2 MB cache made almost every insert hit the disk.
+    conn.execute("PRAGMA journal_mode = WAL")
+    conn.execute("PRAGMA synchronous = NORMAL")
+    conn.execute("PRAGMA cache_size = -65536")
     conn.executescript(DDL)
     return conn
 
