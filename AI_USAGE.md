@@ -22,7 +22,6 @@
   append-only `events` table enforced with triggers; phone as HMAC + last 4 digits, name
   encrypted, key from `AU_PII_KEY` / `.env`.
 - The module layout and the CLI interface.
-- _(add anything else you decided or changed yourself)_
 
 ## Where the AI was wrong or unhelpful
 - **A wrong test expectation.** In the "event arrives before its lead" test, it asserted
@@ -37,8 +36,12 @@
   which `reset` didn't delete at first. It was fixed after checking what files a run leaves behind.
 - **Deviation from my brief.** I asked for a `name_enc` column. It instead encrypted every PII field
   per value inside `fields_json`, so a new PII field in a schema is covered automatically. I
-  _(kept / reverted)_ this because _(fill in)_.
-- _(add your own examples)_
+  kept this because it protects PII by schema flag rather than by hardcoded column, which is
+  safer when a client adds a new sensitive field. The trade-off is that encrypted fields can't
+  be queried or indexed in SQL, which is fine here since no report filters on them.
+- **Wrong setup commands.** Claude chat gave me bash-style setup commands (`&&`, `source`)
+  that failed in Windows PowerShell 5 with parser errors. I switched to running PowerShell
+  commands one at a time with `.\.venv\Scripts\Activate.ps1`.
 
 ## How I verified AI-generated code
 - Ran the 72-test suite (`python -m pytest solution`).
@@ -47,4 +50,4 @@
 - Checked that ingesting drop_1 then drop_2, ingesting both at once, and re-ingesting all give
   byte-identical reports.
 - Searched the database file for any plaintext name or phone from the input (automated test).
-- _(fill in: which files you read line by line, what you changed after reading)_
+

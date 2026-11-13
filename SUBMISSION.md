@@ -1,9 +1,9 @@
 # Submission
 
 ## Candidate
-- **Name:** Ritvik Srivastava
-- **Assignment chosen:** A (Data)
-- **Time spent (honest estimate):** _(fill in)_
+- Name: Ritvik Srivastava
+- Assignment chosen: A (Data pipeline)
+- Time spent (honest estimate): 6.5 hrs
 
 ## How to run
 Works in PowerShell, cmd or bash (Python 3.11+; developed on 3.13, Windows).
